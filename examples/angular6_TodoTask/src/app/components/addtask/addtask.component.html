@@ -1,0 +1,97 @@
+<section class="main-content">
+   <div class="container container-div">
+      <div class="row">
+         <div class="col-md-12">
+            <form [formGroup]="taskForm">
+               <fieldset>
+                  <h4  class="title">Add your task details</h4>
+                  <hr>
+                  <div class="row" formArrayName="task"  *ngFor="let task of getTaskList(taskForm); let i = index;">
+                     <div [formGroupName]="i" class="col-md-12">
+                        <div class="row">
+                           <div class="form-group col-md-2" [ngClass] = "{'has-err': task.get('taskId').errors?.required && task.get('taskId').touched}">
+                              <label [attr.for]="'taskId'+i">Task ID <span style="color: red">*</span></label>
+                              <input type="number" class="form-control" [id]="'taskId'+i" formControlName="taskId" required/>
+                              <div *ngIf="task.get('taskId').errors?.required && task.get('taskId').touched" class="has-err error-msg">
+                                 Task Id is required.
+                              </div>
+                           </div>
+                           <div class="form-group col-md-4" [ngClass] = "{'has-err': task.get('taskName').errors?.required && task.get('taskName').touched}">
+                              <label [attr.for]="'taskName'+i" >Task Name <span style="color: red">*</span></label>
+                              <input type="text" class="form-control" [id]="'taskName'+i" formControlName="taskName"/>
+                              <div *ngIf="task.get('taskName').errors?.required && task.get('taskName').touched" class="has-err error-msg">
+                                 Task Name is required.
+                              </div>
+                           </div>
+                           <div class="form-group col-md-3" [ngClass] = "{'has-err': task.get('durationDate').errors?.required && task.get('durationDate').touched}">
+                              <label [attr.for]="'durationDate'+i">Due date <span style="color: red">*</span></label>
+                              <div class="input-group">
+                                 <input class="form-control" [id]="'durationDate'+i" formControlName="durationDate" placeholder="yyyy-mm-dd" name="dp"  ngbDatepicker #d="ngbDatepicker">
+                                 <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                                      <span><i class="fa fa-calendar icon-color" aria-hidden="true"></i></span>
+                                    </button>
+                                 </div>
+                              </div>
+                              <div *ngIf="task.get('durationDate').errors?.required && task.get('durationDate').touched" class="has-err error-msg">
+                                 Due Date is required.
+                              </div>
+                           </div>
+                           <div class="form-group col-md-3" [ngClass] = "{'has-err': task.get('priority').errors?.required && task.get('priority').touched}">
+                              <div class="row">
+                                 <div class="col-md-12">
+                                    <label>Priority <span style="color: red">*</span></label>
+                                 </div>
+                                 <div class="col-md-12 priority" >
+                                    <select class="form-control" formControlName="priority">
+                                       <option>Critical</option>
+                                       <option>High</option>
+                                       <option>Low</option>
+                                       <option>Medium</option>
+                                    </select>
+                                    <div *ngIf="task.get('priority').errors?.required && task.get('priority').touched" class="has-err error-msg">
+                                       Priority is required.
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row mt-3">
+                     <div class="col-md-2 offset-md-8 mb-2">
+                        <button type="button" class="btn taskBtn" (click)= "addTask()">Add Task</button>
+                     </div>
+                     <div class="col-md-2 mb-2" >
+                        <button type="submit" class="btn submitBtn" (click) = "onSubmit()">Submit</button>
+                     </div>
+                  </div>
+               </fieldset>
+            </form>
+         </div>
+      </div>
+      <div class="row mt-4" *ngIf = "submitBtnClicked && this.taskForm.get('task').status === 'VALID'">
+         <div class="col-md-9">
+            <table class="table">
+               <tr>
+                  <th>Task Id</th>
+                  <th>Task Name</th>
+                  <th>Due Date</th>
+                  <th>Priority</th>
+               </tr>
+               <tr *ngFor="let rowData of rowData" [ngClass]= "addCustomClassBasedOnDueDate(rowData.durationDate)">  
+               <td>{{rowData.taskId}}</td>
+               <td>{{rowData.taskName}}</td>
+               <td [innerHTML] = "getDueDate(rowData.durationDate)" ></td>
+               <td>{{rowData.priority}}</td>
+               </tr>
+            </table>
+         </div>
+         <div class="col-md-3" style="font-size: 13px;">
+              <p class="red-data">Task is overdue</p>
+              <p class="orange-data">Task will get overdue in 3 days</p>
+              <p class="green-data">Task in progress</p>           
+         </div>
+      </div>
+   </div>
+</section>

@@ -1,0 +1,120 @@
+
+.main-content{
+    background: #fcfcfc;
+    padding: 7% 15px 15px 15px;
+    background-image: url(../../../assets/images/background.svg);
+    background-repeat: no-repeat;
+}
+.container-div{
+    background: #fff;
+    padding: 40px;
+    box-shadow: 1px 2px 16px 5px #eee;
+}
+.title{
+    text-align: center;
+    color: #eb158f;
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+.action span{
+    margin-right: 15px;
+    cursor: pointer;
+}
+.action{
+    margin-top: 8px;
+}
+.has-err{
+    border-color: red;
+    color: red;
+}
+.error-msg{
+    font-size: 13px;
+}
+.has-err input{
+    border-color: red;
+    color: red;
+}
+.table{
+    border-collapse: collapse;
+    color: #fff;
+}
+.table td, .table th{
+    border: 1px solid #ddd;
+    
+}
+.high-dueDate{
+   color: red;
+   font-weight: 600;
+}
+.low-dueDate{
+    color: rgb(242, 97, 1);
+    font-weight: 600;
+}
+.no-duedate{
+    color: #0cbf0c;
+    font-weight: 600;
+}
+
+.submitBtn{
+        border: 2px solid #eb158f;
+    border-radius: 5px !important;
+    background: transparent;
+    color: #eb158f;
+    font-weight: 600;
+    width:100%;
+}
+.taskBtn{
+    border: 2px solid #444;
+    border-radius: 5px !important;
+    background: transparent;
+    color: #444;
+    font-weight: 600;
+    width:100%;
+}
+.taskBtn:hover{
+        color: #fff;
+    background-color: #444;
+    border-color: #444;
+}
+.submitBtn:hover{
+        color: #fff;
+    background-color: #eb158f;
+    border-color: #eb158f;
+}
+.calendar{
+    border-color: #eb158f;
+}
+th {
+    background: #666;
+    color: #fff;
+    text-align: center;
+}
+td{
+    text-align: center;
+    font-weight: 400;
+}
+.red-data::before{
+    content: "";
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background: #F00;
+    margin-right: 15px;
+}
+.orange-data::before{
+    content: "";
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background: #ec7800;
+    margin-right: 15px;
+}
+.green-data::before{
+    content: "";
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background: #0cbf0c;
+    margin-right: 15px;
+}
+   
