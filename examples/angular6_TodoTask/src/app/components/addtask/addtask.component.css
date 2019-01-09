@@ -11,18 +11,11 @@
     box-shadow: 1px 2px 16px 5px #eee;
 }
 .title{
-    text-align: center;
     color: #eb158f;
     font-size: 28px;
     margin-bottom: 30px;
 }
-.action span{
-    margin-right: 15px;
-    cursor: pointer;
-}
-.action{
-    margin-top: 8px;
-}
+
 .has-err{
     border-color: red;
     color: red;
@@ -54,9 +47,12 @@
     color: #0cbf0c;
     font-weight: 600;
 }
+.delete-btn{
+    margin-top: 33px;
+}
 
 .submitBtn{
-        border: 2px solid #eb158f;
+    border: 2px solid #eb158f;
     border-radius: 5px !important;
     background: transparent;
     color: #eb158f;
@@ -71,8 +67,15 @@
     font-weight: 600;
     width:100%;
 }
+.deleteBtn{
+     border: 2px solid #eb158f;
+    border-radius: 5px !important;
+    background: transparent;
+    color: #eb158f;
+    font-weight: 600;
+}
 .taskBtn:hover{
-        color: #fff;
+    color: #fff;
     background-color: #444;
     border-color: #444;
 }

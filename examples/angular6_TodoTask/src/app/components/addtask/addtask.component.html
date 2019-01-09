@@ -4,7 +4,15 @@
          <div class="col-md-12">
             <form [formGroup]="taskForm">
                <fieldset>
-                  <h4  class="title">Add your task details</h4>
+                 <div class="row">
+                   <div class="col-md-10">
+                      <h4  class="title">Add your task details</h4>
+                   </div>
+                    <div class="col-md-2 mb-2">
+                        <button type="button" class="btn submitBtn" (click)= "addTask()">
+                          <span><i class="fa fa-plus"></i></span> Add new</button>
+                     </div>
+                 </div>
                   <hr>
                   <div class="row" formArrayName="task"  *ngFor="let task of getTaskList(taskForm); let i = index;">
                      <div [formGroupName]="i" class="col-md-12">
@@ -37,7 +45,7 @@
                                  Due Date is required.
                               </div>
                            </div>
-                           <div class="form-group col-md-3" [ngClass] = "{'has-err': task.get('priority').errors?.required && task.get('priority').touched}">
+                           <div class="form-group col-md-2" [ngClass] = "{'has-err': task.get('priority').errors?.required && task.get('priority').touched}">
                               <div class="row">
                                  <div class="col-md-12">
                                     <label>Priority <span style="color: red">*</span></label>
@@ -55,14 +63,18 @@
                                  </div>
                               </div>
                            </div>
+                           <div class="form-group col-md-1 delete-btn">
+                             <div class="col-md-12">
+                               <button class="btn deleteBtn" [disabled] = "disableDelBtn()" (click)= "deleteTask(i)">
+                                  <span [ngClass]= "i===0 ? 'icon-color-normal' : 'icon-color'"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                               </button>
+                             </div>
+                           </div>
                         </div>
                      </div>
                   </div>
                   <div class="row mt-3">
-                     <div class="col-md-2 offset-md-8 mb-2">
-                        <button type="button" class="btn taskBtn" (click)= "addTask()">Add Task</button>
-                     </div>
-                     <div class="col-md-2 mb-2" >
+                     <div class="offset-md-10 col-md-2 mb-2" >
                         <button type="submit" class="btn submitBtn" (click) = "onSubmit()">Submit</button>
                      </div>
                   </div>

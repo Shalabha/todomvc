@@ -28,7 +28,7 @@ export class AddtaskComponent implements OnInit {
 
     //Initialize the angular 6 reactive form
     ngOnInit() {
-        this.taskForm = this.fb.group({
+         this.taskForm = this.fb.group({
             task: this.fb.array([
                 this.createTaskFormGroup()
             ])
@@ -39,9 +39,10 @@ export class AddtaskComponent implements OnInit {
         this.cdRef.detectChanges();
     }
 
+
     //Internal function for the replicating form component
     createTaskFormGroup(): FormGroup {
-        return this.fb.group({
+            return this.fb.group({
             taskId: ['', Validators.required],
             taskName: ['', Validators.required],
             durationDate: ['', Validators.required],
@@ -50,6 +51,10 @@ export class AddtaskComponent implements OnInit {
     }
     getTaskList(form){
       return form.get('task').controls;
+    }
+
+    get taskArray() {
+       return <FormArray>this.taskForm.get('task');
     }
 
     //function on clicking add task icon
@@ -80,7 +85,7 @@ export class AddtaskComponent implements OnInit {
     }
     // function on clicking the form submit
     onSubmit() {
-        if (this.taskForm.get('task').status === 'VALID') {
+        if (this.taskForm['status'] === 'VALID') {
           this.rowData = [];
             this.submitBtnClicked = true;
             let item = this.taskForm['value']['task'];
@@ -99,14 +104,13 @@ export class AddtaskComponent implements OnInit {
 
     //internal fn to trigger the validation upon form submit, if form is invalid
     validateFormFields(form: FormGroup) {
-        Object.keys(form.controls).forEach(field => { //{2}
-            const control = form.get(field); //{3}
-            if (control instanceof FormControl) { //{4}
+        Object.keys(form.controls).forEach(field => { 
+            const control = form.get(field); 
+            if (control instanceof FormControl) { 
                 control.markAsTouched({
                     onlySelf: true
                 });
             } else if (control instanceof FormArray) {
-                console.log(control)
                 control.controls.forEach((elem) => {
                     if (elem instanceof FormGroup) {
                         this.validateFormFields(elem);
@@ -114,5 +118,17 @@ export class AddtaskComponent implements OnInit {
                 })
             }
         });
+    }
+  
+
+    //function on clicking delete icon of task form
+    deleteTask(index: number){
+      this.taskArray.removeAt(index);
+      this.rowData.splice(index, 1)
+    }
+
+    //function to disable delete icon
+    disableDelBtn(){
+      return this.taskForm['value']['task'].length <=1 ? true: false
     }
 }
